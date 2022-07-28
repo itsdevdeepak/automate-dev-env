@@ -1,0 +1,13 @@
+- hosts: localhost
+  vars:
+    ansible_connection: local
+    ansible_python_interpreter: "{{ansible_playbook_python}}"  
+  pre_tasks:
+    - name: Sync Repositories (Update Packages)
+      become: yes
+      pacman:
+        update_cache: yes
+        state: present
+      tags:
+        - install
+        - core
