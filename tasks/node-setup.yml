@@ -1,0 +1,22 @@
+- name: Install nvm (node version manager)
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+  tags:
+    - node
+    - install
+- name: Install nvm plugin for fish shell
+  shell: omf install nvm
+  args: 
+    executable: /bin/fish
+  tags:
+    - intall
+    - node
+- name: Install Node and Npm lts
+  shell: nvm install --lts
+  args:
+    executable: /bin/fish
+  tags:
+    - install
+    - node
