@@ -1,0 +1,21 @@
+- name: Install essential packeges
+  become: yes
+  pacman:
+    name: ["base-devel", "openssh", "curl", "python-pip", "neofetch"]
+  tags:
+    - core
+    - install
+- name: Install utility packages
+  become: yes
+  pacman: 
+    name: ["btop", "neovim", "zip", "unzip"]
+  tags:
+    - core
+    - install
+- name: optional but fun
+  become: yes
+  pacman:
+    name: ["cmatrix", "lolcat", "cowsay"]
+  tags:
+    - core
+    - install
