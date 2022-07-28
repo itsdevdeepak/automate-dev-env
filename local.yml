@@ -11,3 +11,9 @@
       tags:
         - install
         - core
+        - git
+  tasks:
+    - include_tasks: ./tasks/core-pkgs.yml
+    - include_tasks: ./tasks/git-setup.yml
+    - include_tasks: ./tasks/fish-setup.yml
+    - include_tasks: ./tasks/node-setup.yml
