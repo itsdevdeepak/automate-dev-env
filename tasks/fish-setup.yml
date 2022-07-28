@@ -1,0 +1,38 @@
+- name: Install fish (shell) with pacman
+  become: yes
+  pacman:
+    name: fish
+    state: present
+  tags:
+    - fish
+    - install
+- name: Set login shell of {{ ansible_env.USER }} to `/bin/fish` with `usermod`
+  ansible.builtin.command: usermod --shell /bin/fish {{ ansible_env.USER }}
+  become: true
+  changed_when: false
+  tags:
+    - fish
+    - install
+- name: Install omf (oh my fish)
+  shell: curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+  args:
+    executable: /bin/fish
+  tags:
+    - fish
+    - install
+- name: Install pure theme and use it with omf
+  shell: omf install pure && omf theme pure
+  args:
+    executable: /bin/fish
+- name: Install cappuccin color scheme with omf
+  shell: omf install https://github.com/catppuccin/fish
+  args: 
+    executable: /bin/fish
+  tags:
+    - fish
+    - install
+- name: Add mocha.fish file manually to ~/.config/fish/conf.d/
+  shell: curl -o ~/.config/fish/conf.d/mocha.fish
+  tags: 
+    - fish
+    - install
